@@ -2,6 +2,8 @@ package com.amio.cts.sysuser.service;
 
 import com.amio.cts.sysuser.entity.SysUser;
 
+import java.util.List;
+
 /**
  * 用户接口
  *
@@ -24,10 +26,24 @@ public interface SysUserService {
     void deleteUser(int id);
 
     /**
+     * 通过用户id修改用户信息
+     *
+     * @param sysUser 系统用户对象
+     */
+    void updateUser(SysUser sysUser);
+
+    /**
      * 通过用户id查找用户信息
      *
      * @param id 用户id
      * @return 用户信息
      */
     SysUser findUserById(int id);
+
+    /**
+     * 查找所有用户信息
+     *
+     * @return 用户用户信息列表
+     */
+    List<SysUser> findAllUsers();
 }

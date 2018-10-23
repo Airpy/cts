@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * 用户接口实现
@@ -35,7 +36,18 @@ public class SysUserServiceImpl implements SysUserService {
     }
 
     @Override
+    public void updateUser(SysUser sysUser) {
+        sysUser.setLastUpdateTime(LocalDateTime.now());
+        this.sysUserDao.updateByPrimaryKeySelective(sysUser);
+    }
+
+    @Override
     public SysUser findUserById(int id) {
         return this.sysUserDao.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public List<SysUser> findAllUsers() {
+        return this.sysUserDao.selectAll();
     }
 }
