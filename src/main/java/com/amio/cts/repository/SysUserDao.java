@@ -1,6 +1,6 @@
-package com.amio.cts.sysuser.dao;
+package com.amio.cts.repository;
 
-import com.amio.cts.sysuser.entity.SysUser;
+import com.amio.cts.domain.SysUser;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,6 +12,12 @@ import java.util.List;
 public interface SysUserDao {
     int deleteByPrimaryKey(Integer id);
 
+    /**
+     * 插入sys_user表数据
+     *
+     * @param record user对象
+     * @return 成功返回1
+     */
     int insert(SysUser record);
 
     int insertSelective(SysUser record);

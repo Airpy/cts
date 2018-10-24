@@ -1,6 +1,7 @@
-package com.amio.cts.sysuser.service;
+package com.amio.cts.service;
 
-import com.amio.cts.sysuser.entity.SysUser;
+import com.amio.cts.common.Response;
+import com.amio.cts.domain.SysUser;
 
 import java.util.List;
 
@@ -15,8 +16,9 @@ public interface SysUserService {
      * 新增系统用户
      *
      * @param sysUser 系统用户对象
+     * @return Response 处理结果
      */
-    void createUser(SysUser sysUser);
+    Response createUser(SysUser sysUser);
 
     /**
      * 通过用户id删除用户信息

@@ -1,7 +1,8 @@
-package com.amio.cts.sysuser.controller;
+package com.amio.cts.controller;
 
-import com.amio.cts.sysuser.entity.SysUser;
-import com.amio.cts.sysuser.service.SysUserService;
+import com.amio.cts.common.Response;
+import com.amio.cts.domain.SysUser;
+import com.amio.cts.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -25,8 +26,8 @@ public class SysUserController {
     }
 
     @PostMapping(path = "")
-    public void createUser(SysUser sysUser) {
-        this.sysUserService.createUser(sysUser);
+    public Response createUser(SysUser sysUser) {
+        return this.sysUserService.createUser(sysUser);
     }
 
     @DeleteMapping(path = "/{id}")
@@ -34,11 +35,11 @@ public class SysUserController {
         this.sysUserService.deleteUser(id);
     }
 
-    @PutMapping(path = "/{id}",
+    @PutMapping(path = "/{userId}",
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public void updateUser(SysUser sysUser, @PathVariable int id) {
-        SysUser user = this.sysUserService.findUserById(id);
+    public void updateUser(SysUser sysUser, @PathVariable int userId) {
+        SysUser user = this.sysUserService.findUserById(userId);
         if (null != user) {
             this.sysUserService.updateUser(sysUser);
         }

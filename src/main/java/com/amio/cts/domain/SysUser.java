@@ -1,7 +1,6 @@
-package com.amio.cts.sysuser.entity;
+package com.amio.cts.domain;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.StringJoiner;
 
 public class SysUser {
