@@ -1,5 +1,7 @@
 package com.amio.cts.common;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.StringJoiner;
@@ -10,6 +12,7 @@ import java.util.StringJoiner;
  * @author : zhenfeng.liu
  * @date : 2018/9/4 17:24
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Response<T> implements Serializable {
     private static final long serialVersionUID = 1L;
     /**
@@ -37,6 +40,12 @@ public class Response<T> implements Serializable {
         this.code = SUCCESS_CODE;
         this.message = "请求成功";
         this.localDateTime = LocalDateTime.now();
+    }
+
+    public Response(String code, String message, LocalDateTime localDateTime) {
+        this.code = code;
+        this.message = message;
+        this.localDateTime = localDateTime;
     }
 
     public Response(String code, String message, T data) {

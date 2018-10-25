@@ -1,6 +1,8 @@
 package com.amio.cts.service.impl;
 
 import com.amio.cts.common.Response;
+import com.amio.cts.enums.SysUserErrorCode;
+import com.amio.cts.exceptions.SysUserException;
 import com.amio.cts.repository.SysUserDao;
 import com.amio.cts.domain.SysUser;
 import com.amio.cts.service.SysUserService;
@@ -35,19 +37,20 @@ public class SysUserServiceImpl implements SysUserService {
         String username = sysUser.getUsername();
         String password = sysUser.getPassword();
         Response response = new Response();
-        if (StringUtils.isNotBlank(username) && StringUtils.isNotBlank(password)) {
-            sysUser.setCreateTime(response.getLocalDateTime());
-            sysUser.setLastUpdateTime(response.getLocalDateTime());
-            logger.info("create sys_user begin: " + sysUser.toString());
-            this.sysUserDao.insert(sysUser);
-            logger.info("create sys_user end.");
-            response.setData(sysUser);
-            return response;
-        } else {
-            response.setCode("00001");
-            response.setMessage("username or password is null or whitespace.");
-            return response;
-        }
+        throw new SysUserException(SysUserErrorCode.PASSWORD_LENGTH_ERROR);
+//        if (StringUtils.isNotBlank(username) && StringUtils.isNotBlank(password)) {
+//            sysUser.setCreateTime(response.getLocalDateTime());
+//            sysUser.setLastUpdateTime(response.getLocalDateTime());
+//            logger.info("create sys_user begin: " + sysUser.toString());
+//            this.sysUserDao.insert(sysUser);
+//            logger.info("create sys_user end.");
+//            response.setData(sysUser);
+//            return response;
+//        } else {
+//            response.setCode("00001");
+//            response.setMessage("username or password is null or whitespace.");
+//            return response;
+//        }
     }
 
     @Override
