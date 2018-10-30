@@ -16,9 +16,9 @@ public enum SysUserErrorCode {
      */
     USERNAME_LENGTH_ERROR("U1002", "username length error: at least 6 characters and up to 32 characters."),
     /**
-     * 密码复杂度错误,至少为8位,且包含字母、数字、符号
+     * 密码复杂度错误,至少为6位,且包含字母、数字、符号
      */
-    PASSWORD_COMPLEXITY_ERROR("U1003", "password complexity error: it must be at least 8 characters and have " +
+    PASSWORD_COMPLEXITY_ERROR("U1003", "password complexity error: it must be at least 6 characters and have " +
             "letters/numbers/special character."),
     /**
      * 密码长度错误,至少为6位,最多为32位

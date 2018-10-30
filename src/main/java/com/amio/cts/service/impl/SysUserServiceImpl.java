@@ -33,24 +33,38 @@ public class SysUserServiceImpl implements SysUserService {
     }
 
     @Override
+    public boolean isUserExist(SysUser sysUser) {
+        String username = sysUser.getUsername();
+        if (StringUtils.isNotBlank(username)) {
+            SysUser user = sysUserDao.selectByUsername(username);
+            if (null != user) {
+                logger.error("Unable to create. A User with name {} already exist.", username);
+                throw new SysUserException(SysUserErrorCode.USERNAME_EXISTS);
+            }
+        }
+        return false;
+    }
+
+    @Override
     public Response createUser(SysUser sysUser) {
         String username = sysUser.getUsername();
         String password = sysUser.getPassword();
-        Response response = new Response();
-        throw new SysUserException(SysUserErrorCode.PASSWORD_LENGTH_ERROR);
-//        if (StringUtils.isNotBlank(username) && StringUtils.isNotBlank(password)) {
-//            sysUser.setCreateTime(response.getLocalDateTime());
-//            sysUser.setLastUpdateTime(response.getLocalDateTime());
-//            logger.info("create sys_user begin: " + sysUser.toString());
-//            this.sysUserDao.insert(sysUser);
-//            logger.info("create sys_user end.");
-//            response.setData(sysUser);
-//            return response;
-//        } else {
-//            response.setCode("00001");
-//            response.setMessage("username or password is null or whitespace.");
-//            return response;
-//        }
+        Response<SysUser> response = new Response<>();
+        if (StringUtils.isNotBlank(username) && StringUtils.isNotBlank(password)) {
+            sysUser.setId(sysUserDao.selectCount() + 1);
+            sysUser.setCreateTime(response.getLocalDateTime());
+            sysUser.setLastUpdateTime(response.getLocalDateTime());
+            logger.info("create sys_user begin: " + sysUser.toString());
+            this.sysUserDao.insert(sysUser);
+            logger.info("create sys_user end.");
+            response.setData(sysUser);
+            return response;
+        } else {
+            response.setCode("00001");
+            response.setMessage("username or password is null or whitespace.");
+            logger.error("Create Sys User error: {}", response.toString());
+            return response;
+        }
     }
 
     @Override

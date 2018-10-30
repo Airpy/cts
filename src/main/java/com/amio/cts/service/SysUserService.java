@@ -13,6 +13,14 @@ import java.util.List;
  */
 public interface SysUserService {
     /**
+     * 合法性校验
+     *
+     * @param sysUser 系统用户对象
+     * @return 合法则返回true, 否则false
+     */
+    boolean isUserExist(SysUser sysUser);
+
+    /**
      * 新增系统用户
      *
      * @param sysUser 系统用户对象

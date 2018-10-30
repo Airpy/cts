@@ -25,7 +25,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public Response handleException(HttpServletRequest request, Exception ex) {
         if (ex instanceof SysUserException) {
-            logger.error("SysUserException code:{}, msg:{}", ((SysUserException) ex).getSysUserErrorCode().getCode(),
+            logger.error("SysUserException code: {}, msg: {}", ((SysUserException) ex).getSysUserErrorCode().getCode(),
                     ((SysUserException) ex).getSysUserErrorCode().getMsg());
             return new Response(((SysUserException) ex).getSysUserErrorCode().getCode(),
                     ((SysUserException) ex).getSysUserErrorCode().getMsg(), LocalDateTime.now());
