@@ -38,8 +38,9 @@ public class SysUserController {
     }
 
     @DeleteMapping(path = "/{id}")
-    public void deleteUser(@PathVariable int id) {
-        this.sysUserService.deleteUser(id);
+    public Response deleteUser(@PathVariable int id) {
+        logger.info("Deleting Sys User, id is {}", id);
+        return this.sysUserService.deleteUser(id);
     }
 
     @PutMapping(path = "/{userId}",

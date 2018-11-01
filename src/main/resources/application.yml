@@ -10,5 +10,13 @@ spring:
     password: 111111wwq
 ---
 mybatis:
-     mapper-locations: classpath:mapping/*/*.xml
-     type-aliases-package: com.amio.cts.*.entity
+  mapper-locations: classpath:mapping/*/*.xml
+  type-aliases-package: com.amio.cts.*.domain
+---
+#控制台打印sql
+logging:
+  level:
+    com:
+      amio:
+        cts:
+          repository: debug

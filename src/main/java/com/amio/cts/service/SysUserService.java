@@ -33,7 +33,7 @@ public interface SysUserService {
      *
      * @param id 用户id
      */
-    void deleteUser(int id);
+    Response deleteUser(int id);
 
     /**
      * 通过用户id修改用户信息

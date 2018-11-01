@@ -7,11 +7,11 @@ import java.util.List;
 
 /**
  * 用户Dao
+ *
+ * @author zhenfeng.liu
  */
 @Service
 public interface SysUserDao {
-    int deleteByPrimaryKey(Integer id);
-
     /**
      * 插入sys_user表数据
      *
@@ -21,6 +21,14 @@ public interface SysUserDao {
     int insert(SysUser record);
 
     int insertSelective(SysUser record);
+
+    /**
+     * 根据id删除sys_user表数据
+     *
+     * @param id 表id
+     * @return 删除的行数
+     */
+    int deleteByPrimaryKey(Integer id);
 
     SysUser selectByPrimaryKey(Integer id);
 

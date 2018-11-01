@@ -68,8 +68,15 @@ public class SysUserServiceImpl implements SysUserService {
     }
 
     @Override
-    public void deleteUser(int id) {
-        this.sysUserDao.deleteByPrimaryKey(id);
+    public Response deleteUser(int id) {
+        logger.info("delete sys_user begin.");
+        Response response = new Response();
+        int i = this.sysUserDao.deleteByPrimaryKey(id);
+        if (i == 1) {
+            return response;
+        } else {
+            throw new RuntimeException("Delete Sys User fail.");
+        }
     }
 
     @Override
