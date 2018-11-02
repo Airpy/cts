@@ -32,6 +32,7 @@ public interface SysUserService {
      * 通过用户id删除用户信息
      *
      * @param id 用户id
+     * @return Response 处理结果
      */
     Response deleteUser(int id);
 
@@ -39,6 +40,7 @@ public interface SysUserService {
      * 通过用户id修改用户信息
      *
      * @param sysUser 系统用户对象
+     * @return Response 处理结果
      */
     Response updateUser(SysUser sysUser);
 
@@ -48,12 +50,12 @@ public interface SysUserService {
      * @param id 用户id
      * @return 用户信息
      */
-    SysUser findUserById(int id);
+    Response findUserById(int id);
 
     /**
      * 查找所有用户信息
      *
      * @return 用户用户信息列表
      */
-    List<SysUser> findAllUsers();
+    Response findAllUsers();
 }

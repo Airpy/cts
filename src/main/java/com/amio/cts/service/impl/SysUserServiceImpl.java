@@ -51,7 +51,7 @@ public class SysUserServiceImpl implements SysUserService {
         String password = sysUser.getPassword();
         Response<SysUser> response = new Response<>();
         if (StringUtils.isNotBlank(username) && StringUtils.isNotBlank(password)) {
-            sysUser.setId(sysUserDao.selectCount() + 1);
+            sysUser.setId(sysUserDao.getMaxId() + 1);
             sysUser.setCreateTime(response.getActionTime());
             sysUser.setLastUpdateTime(response.getActionTime());
             logger.info("create sys_user begin: " + sysUser.toString());
@@ -73,9 +73,10 @@ public class SysUserServiceImpl implements SysUserService {
         Response response = new Response();
         int i = this.sysUserDao.deleteByPrimaryKey(id);
         if (i == 1) {
+            logger.info("delete sys_user end.");
             return response;
         } else {
-            throw new RuntimeException("Delete Sys User fail.");
+            throw new RuntimeException("delete sys_user fail.");
         }
     }
 
@@ -86,19 +87,34 @@ public class SysUserServiceImpl implements SysUserService {
         sysUser.setLastUpdateTime(LocalDateTime.now());
         int i = this.sysUserDao.updateByPrimaryKeySelective(sysUser);
         if (i == 1) {
+            logger.info("update sys_user end.");
             return response;
         } else {
-            throw new RuntimeException("Update Sys User fail.");
+            throw new RuntimeException("update sys_user fail.");
         }
     }
 
     @Override
-    public SysUser findUserById(int id) {
-        return this.sysUserDao.selectByPrimaryKey(id);
+    public Response findUserById(int id) {
+        logger.info("fetch sys_user begin.");
+        SysUser sysUser = this.sysUserDao.selectByPrimaryKey(id);
+        if (null == sysUser) {
+            logger.warn("Sys User with id {} not found.", id);
+            return null;
+        }
+        logger.info("fetch sys_user end.");
+        return new Response<>(sysUser);
     }
 
     @Override
-    public List<SysUser> findAllUsers() {
-        return this.sysUserDao.selectAll();
+    public Response findAllUsers() {
+        logger.info("fetch sys_user begin.");
+        List<SysUser> sysUsers = this.sysUserDao.selectAll();
+        if (null == sysUsers) {
+            logger.warn("Sys User is empty.");
+            return null;
+        }
+        logger.info("fetch sys_user end.");
+        return new Response<>(sysUsers);
     }
 }

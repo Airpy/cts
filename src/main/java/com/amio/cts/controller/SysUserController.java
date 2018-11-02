@@ -11,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 /**
  * 用户Controller
  *
@@ -33,7 +31,7 @@ public class SysUserController {
     @PostMapping(path = "")
     public Response createUser(SysUser sysUser) {
         logger.info("Creating Sys User: {}", sysUser);
-        if (!sysUserService.isUserExist(sysUser)) {
+        if (!this.sysUserService.isUserExist(sysUser)) {
             return this.sysUserService.createUser(sysUser);
         }
         return null;
@@ -42,9 +40,8 @@ public class SysUserController {
     @DeleteMapping(path = "/{id}")
     public Response deleteUser(@PathVariable int id) {
         logger.info("Fetching & Deleting Sys User with id {}", id);
-        SysUser sysUser = sysUserService.findUserById(id);
-        if (null == sysUser) {
-            logger.error("Unable to delete. Sys User with id {} not found.", id);
+        Response response = this.sysUserService.findUserById(id);
+        if (null == response) {
             throw new SysUserException(SysUserErrorCode.USER_NOT_FOUND);
         }
         return this.sysUserService.deleteUser(id);
@@ -55,21 +52,30 @@ public class SysUserController {
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public void updateUser(SysUser sysUser, @PathVariable int userId) {
         logger.info("Fetching & Updating Sys User with id {}", userId);
-        SysUser user = this.sysUserService.findUserById(userId);
-        if (null == user) {
-            logger.error("Unable to delete. Sys User with id {} not found.", userId);
+        Response response = this.sysUserService.findUserById(userId);
+        if (null == response) {
             throw new SysUserException(SysUserErrorCode.USER_NOT_FOUND);
         }
         this.sysUserService.updateUser(sysUser);
     }
 
     @GetMapping(path = "/{id}")
-    public SysUser findUserById(@PathVariable("id") int id) {
-        return this.sysUserService.findUserById(id);
+    public Response findUserById(@PathVariable("id") int id) {
+        logger.info("Fetching Sys User with id {}", id);
+        Response response = this.sysUserService.findUserById(id);
+        if (response == null) {
+            return new Response<>(null);
+        }
+        return response;
     }
 
     @GetMapping(path = "")
-    public List<SysUser> findAllUsers() {
-        return this.sysUserService.findAllUsers();
+    public Response findAllUsers() {
+        logger.info("Fetching All Sys User.");
+        Response response = this.sysUserService.findAllUsers();
+        if (response == null) {
+            return new Response<>(null);
+        }
+        return response;
     }
 }

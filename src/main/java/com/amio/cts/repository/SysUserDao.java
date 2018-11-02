@@ -30,6 +30,12 @@ public interface SysUserDao {
      */
     int deleteByPrimaryKey(Integer id);
 
+    /**
+     * 通过主键查找用户
+     *
+     * @param id 主键id
+     * @return 用户
+     */
     SysUser selectByPrimaryKey(Integer id);
 
     /**
@@ -40,7 +46,19 @@ public interface SysUserDao {
      */
     SysUser selectByUsername(String username);
 
+    /**
+     * 查找所有用户
+     *
+     * @return 所有用户
+     */
     List<SysUser> selectAll();
+
+    /**
+     * 获取用户表最大id
+     *
+     * @return 最大id
+     */
+    int getMaxId();
 
     /**
      * 查询sys_user表总行数

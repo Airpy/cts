@@ -29,6 +29,10 @@
         <include refid="Base_Column_List"/>
         from sys_user
     </select>
+    <select id="getMaxId" resultType="java.lang.Integer">
+        select max(id)
+        from sys_user
+    </select>
     <select id="selectCount" resultType="java.lang.Integer">
         select count(1)
         from sys_user

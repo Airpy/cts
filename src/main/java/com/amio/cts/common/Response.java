@@ -12,8 +12,9 @@ import java.util.StringJoiner;
  * @author : zhenfeng.liu
  * @date : 2018/9/4 17:24
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Response<T> implements Serializable {
+    //  @JsonInclude(JsonInclude.Include.NON_NULL)  如果要排除Null的则注释在类上面
+
     private static final long serialVersionUID = 1L;
     /**
      * 请求成功返回码为：0000
