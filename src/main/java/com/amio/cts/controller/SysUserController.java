@@ -2,6 +2,8 @@ package com.amio.cts.controller;
 
 import com.amio.cts.common.Response;
 import com.amio.cts.domain.SysUser;
+import com.amio.cts.enums.SysUserErrorCode;
+import com.amio.cts.exceptions.SysUserException;
 import com.amio.cts.service.SysUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,7 +41,12 @@ public class SysUserController {
 
     @DeleteMapping(path = "/{id}")
     public Response deleteUser(@PathVariable int id) {
-        logger.info("Deleting Sys User, id is {}", id);
+        logger.info("Fetching & Deleting Sys User with id {}", id);
+        SysUser sysUser = sysUserService.findUserById(id);
+        if (null == sysUser) {
+            logger.error("Unable to delete. Sys User with id {} not found.", id);
+            throw new SysUserException(SysUserErrorCode.USER_NOT_FOUND);
+        }
         return this.sysUserService.deleteUser(id);
     }
 

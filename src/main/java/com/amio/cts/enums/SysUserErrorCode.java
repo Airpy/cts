@@ -23,7 +23,11 @@ public enum SysUserErrorCode {
     /**
      * 密码长度错误,至少为6位,最多为32位
      */
-    PASSWORD_LENGTH_ERROR("U1003", "password length error: at least 6 characters and up to 32 characters.");
+    PASSWORD_LENGTH_ERROR("U1003", "password length error: at least 6 characters and up to 32 characters."),
+    /**
+     * 用户不存在
+     */
+    USER_NOT_FOUND("U1004", "user is not found.");
 
     /**
      * 错误码

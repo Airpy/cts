@@ -52,8 +52,8 @@ public class SysUserServiceImpl implements SysUserService {
         Response<SysUser> response = new Response<>();
         if (StringUtils.isNotBlank(username) && StringUtils.isNotBlank(password)) {
             sysUser.setId(sysUserDao.selectCount() + 1);
-            sysUser.setCreateTime(response.getLocalDateTime());
-            sysUser.setLastUpdateTime(response.getLocalDateTime());
+            sysUser.setCreateTime(response.getActionTime());
+            sysUser.setLastUpdateTime(response.getActionTime());
             logger.info("create sys_user begin: " + sysUser.toString());
             this.sysUserDao.insert(sysUser);
             logger.info("create sys_user end.");

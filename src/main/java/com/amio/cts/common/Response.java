@@ -34,18 +34,18 @@ public class Response<T> implements Serializable {
     /**
      * 操作时间
      */
-    private LocalDateTime localDateTime;
+    private LocalDateTime actionTime;
 
     public Response() {
         this.code = SUCCESS_CODE;
         this.message = "请求成功";
-        this.localDateTime = LocalDateTime.now();
+        this.actionTime = LocalDateTime.now();
     }
 
-    public Response(String code, String message, LocalDateTime localDateTime) {
+    public Response(String code, String message, LocalDateTime actionTime) {
         this.code = code;
         this.message = message;
-        this.localDateTime = localDateTime;
+        this.actionTime = actionTime;
     }
 
     public Response(String code, String message, T data) {
@@ -84,12 +84,12 @@ public class Response<T> implements Serializable {
         this.data = data;
     }
 
-    public LocalDateTime getLocalDateTime() {
-        return localDateTime;
+    public LocalDateTime getActionTime() {
+        return actionTime;
     }
 
-    public void setLocalDateTime(LocalDateTime localDateTime) {
-        this.localDateTime = localDateTime;
+    public void setActionTime(LocalDateTime actionTime) {
+        this.actionTime = actionTime;
     }
 
     @Override
@@ -98,7 +98,7 @@ public class Response<T> implements Serializable {
                 .add("code='" + code + "'")
                 .add("message='" + message + "'")
                 .add("data=" + data)
-                .add("localDateTime=" + localDateTime)
+                .add("actionTime=" + actionTime)
                 .toString();
     }
 }
