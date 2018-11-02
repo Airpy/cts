@@ -54,10 +54,13 @@ public class SysUserController {
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public void updateUser(SysUser sysUser, @PathVariable int userId) {
+        logger.info("Fetching & Updating Sys User with id {}", userId);
         SysUser user = this.sysUserService.findUserById(userId);
-        if (null != user) {
-            this.sysUserService.updateUser(sysUser);
+        if (null == user) {
+            logger.error("Unable to delete. Sys User with id {} not found.", userId);
+            throw new SysUserException(SysUserErrorCode.USER_NOT_FOUND);
         }
+        this.sysUserService.updateUser(sysUser);
     }
 
     @GetMapping(path = "/{id}")

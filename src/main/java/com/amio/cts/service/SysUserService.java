@@ -40,7 +40,7 @@ public interface SysUserService {
      *
      * @param sysUser 系统用户对象
      */
-    void updateUser(SysUser sysUser);
+    Response updateUser(SysUser sysUser);
 
     /**
      * 通过用户id查找用户信息

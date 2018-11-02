@@ -80,9 +80,16 @@ public class SysUserServiceImpl implements SysUserService {
     }
 
     @Override
-    public void updateUser(SysUser sysUser) {
+    public Response updateUser(SysUser sysUser) {
+        logger.info("update sys_user begin.");
+        Response response = new Response();
         sysUser.setLastUpdateTime(LocalDateTime.now());
-        this.sysUserDao.updateByPrimaryKeySelective(sysUser);
+        int i = this.sysUserDao.updateByPrimaryKeySelective(sysUser);
+        if (i == 1) {
+            return response;
+        } else {
+            throw new RuntimeException("Update Sys User fail.");
+        }
     }
 
     @Override
