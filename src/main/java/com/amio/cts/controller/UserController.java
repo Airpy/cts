@@ -4,6 +4,8 @@ import com.amio.cts.domain.SysUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -16,9 +18,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(path = "account")
 public class UserController {
     @GetMapping(path = "/login")
-    public String loginForm(ModelMap map) {
-        map.addAttribute("user", new SysUser());
+    public String loginForm() {
+        return "account/login";
+    }
+
+    @PostMapping(value = "/login")
+    public String login(@ModelAttribute SysUser sysUser) {
+        System.out.println(sysUser.getUsername());
+        System.out.println(sysUser.getPassword());
+        return "index";
+    }
+
+    @GetMapping(path = "/register")
+    public String registerForm(ModelMap map) {
+        map.addAttribute("sysUser", new SysUser());
         map.addAttribute("action", "login");
-        return "login";
+        return "account/register";
     }
 }

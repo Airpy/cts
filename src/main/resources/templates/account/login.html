@@ -23,13 +23,13 @@
     <div class="login-box-body">
         <p class="login-box-msg"><b>用 户 登 录</b></p>
 
-        <form th:action="@{/user/{action}(action=${action})}" method="post">
+        <form action="#" th:action="@{/account/login}" method="post">
             <div class="form-group has-feedback">
-                <input type="text" class="form-control" placeholder="用户名">
+                <input type="text" class="form-control" id="username" name="username" placeholder="用户名">
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input type="password" class="form-control" placeholder="密码">
+                <input type="password" class="form-control" id="password" name="password" placeholder="密码">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="row">
@@ -54,12 +54,9 @@
             <a class="btn btn-social-icon btn-github"><i class="fa fa-github"></i></a>&nbsp&nbsp
             <a class="btn btn-social-icon btn-google"><i class="fa fa-google-plus"></i></a>
         </div>
-        <!-- /.social-auth-links -->
-        <a href="register.html" class="text-center">注册账号</a>
+        <a href="/account/register" class="text-center">注册账号</a>
     </div>
-    <!-- /.login-box-body -->
 </div>
-<!-- /.login-box -->
 
 <script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
 <script th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
